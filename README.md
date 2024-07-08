@@ -1,4 +1,6 @@
-# banking Application
+# Horizon
+
+- Modern banking applicaton for everyone
 
 ### Figma Design
 
