@@ -10,10 +10,12 @@ import { Form } from "@/components/ui/form";
 import FormInput from "./FormInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const formSchema = authFormSchema(type);
   type AuthFormSchemaType = z.infer<typeof formSchema>;
@@ -26,11 +28,28 @@ const AuthForm = ({ type }: { type: string }) => {
     },
   });
 
-  function onSubmit(values: AuthFormSchemaType) {
+  const onSubmit = async (data: AuthFormSchemaType) => {
     setIsLoading(true);
-    console.log(values);
-    setIsLoading(false);
-  }
+    try {
+      if (type === "sign-up") {
+        // const newUser = await SignUp(data);
+        // setUser(newUser);
+      }
+      if (type === "sign-in") {
+        // const response = await signIn({
+        //   email: data.email,
+        //   password: data.password,
+        // });
+        // if (response) {
+        //   router.push("/");
+        // }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section className="auth-form">
@@ -85,6 +104,12 @@ const AuthForm = ({ type }: { type: string }) => {
                     label="Address"
                     placeholder="Enter your specific address"
                   />
+                  <FormInput
+                    control={form.control}
+                    name="city"
+                    label="City"
+                    placeholder="Enter your city"
+                  />
                   <div className="flex gap-4">
                     <FormInput
                       control={form.control}
@@ -115,7 +140,6 @@ const AuthForm = ({ type }: { type: string }) => {
                   </div>
                 </>
               )}
-
               <FormInput
                 control={form.control}
                 name="email"
