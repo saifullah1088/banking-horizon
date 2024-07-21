@@ -17,3 +17,4 @@ https://www.figma.com/design/jvcjzjCKw9YlhCNOIY1GPY/Horizon-Banking-App?node-id=
 
 - React Countup (pnpm add react-countup)
 - Chart.js (pnpm add chart.js) and (pnpm add react-chartjs-2)
+- pnpm add node-appwrite
