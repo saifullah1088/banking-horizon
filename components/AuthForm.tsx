@@ -11,14 +11,15 @@ import FormInput from "./FormInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
-export type AuthFormSchemaType = z.infer<typeof authFormSchema>;
-
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const formSchema = authFormSchema(type);
+  type AuthFormSchemaType = z.infer<typeof formSchema>;
+
   const form = useForm<AuthFormSchemaType>({
-    resolver: zodResolver(authFormSchema),
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -62,6 +63,59 @@ const AuthForm = ({ type }: { type: string }) => {
         <>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              {type === "sign-up" && (
+                <>
+                  <div className="flex gap-4">
+                    <FormInput
+                      control={form.control}
+                      name="firstName"
+                      label="First Name"
+                      placeholder="Enter your first name"
+                    />
+                    <FormInput
+                      control={form.control}
+                      name="lastName"
+                      label="Last Name"
+                      placeholder="Enter your last name"
+                    />
+                  </div>
+                  <FormInput
+                    control={form.control}
+                    name="address"
+                    label="Address"
+                    placeholder="Enter your specific address"
+                  />
+                  <div className="flex gap-4">
+                    <FormInput
+                      control={form.control}
+                      name="state"
+                      label="State"
+                      placeholder="Example: NY"
+                    />
+                    <FormInput
+                      control={form.control}
+                      name="postalCode"
+                      label="Post Code"
+                      placeholder="Example: 11101"
+                    />
+                  </div>
+                  <div className="flex gap-4">
+                    <FormInput
+                      control={form.control}
+                      name="dateOfBirth"
+                      label="Date of Birth"
+                      placeholder="YYYY-MM-DD"
+                    />
+                    <FormInput
+                      control={form.control}
+                      name="ssn"
+                      label="SSN"
+                      placeholder="Example: 1234"
+                    />
+                  </div>
+                </>
+              )}
+
               <FormInput
                 control={form.control}
                 name="email"

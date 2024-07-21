@@ -9,12 +9,13 @@ import { Control, FieldPath, FieldName } from "react-hook-form";
 import { z } from "zod";
 import { authFormSchema } from "@/lib/utils";
 
-type AuthFormSchemaType = z.infer<typeof authFormSchema>;
+const formSchema = authFormSchema("sign-up");
+type AuthFormSchemaType = z.infer<typeof formSchema>;
 
 interface InputFormType {
   control: Control<AuthFormSchemaType>;
-  label: "Email" | "Password";
   name: FieldPath<AuthFormSchemaType>;
+  label: string;
   placeholder: string;
 }
 
@@ -29,6 +30,7 @@ const FormInput = ({ control, label, name, placeholder }: InputFormType) => {
           <div className="flex w-full flex-col">
             <FormControl>
               <Input
+                id={name}
                 placeholder={placeholder}
                 className="input-class"
                 type={name === "password" ? "password" : "text"}
