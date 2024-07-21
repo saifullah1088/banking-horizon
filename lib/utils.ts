@@ -198,16 +198,49 @@ export const getTransactionStatus = (date: Date) => {
 export const authFormSchema = (type: string) =>
   z.object({
     // sign-up
-    firstName: type === "sign-in" ? z.string().optional() : z.string().min(3),
-    lastName: type === "sign-in" ? z.string().optional() : z.string().min(3),
-    address: type === "sign-in" ? z.string().optional() : z.string().max(50),
-    city: type === "sign-in" ? z.string().optional() : z.string().max(50),
+    firstName:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, { message: "First Name is required" }),
+    lastName:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, { message: "Last Name is required" }),
+    address:
+      type === "sign-in"
+        ? z.string().optional()
+        : z
+            .string()
+            .min(3, { message: "Specific address is required" })
+            .max(50, { message: "Address must contain max 50 character(s)" }),
+    city:
+      type === "sign-in"
+        ? z.string().optional()
+        : z
+            .string()
+            .min(3, { message: "City is required" })
+            .max(50, { message: "City must contain max 50 character(s)" }),
     state:
-      type === "sign-in" ? z.string().optional() : z.string().min(2).max(2),
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(2, { message: "State is required" }).max(2),
     postalCode:
-      type === "sign-in" ? z.string().optional() : z.string().min(3).max(6),
-    dateOfBirth: type === "sign-in" ? z.string().optional() : z.string().min(3),
-    ssn: type === "sign-in" ? z.string().optional() : z.string().min(3),
+      type === "sign-in"
+        ? z.string().optional()
+        : z
+            .string()
+            .min(3, { message: "Postal code must contain atleast 3 number(s)" })
+            .max(6, { message: "Postal code must contain max 6 number(s)" }),
+    dateOfBirth:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, { message: "Date of Birth is required" }),
+    ssn:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, {
+            message: "Ssn must contain atleast 3 number(s)",
+          }),
     // both sign-up and sign-in
     email: z.string().email(),
     password: z
