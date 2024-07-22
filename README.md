@@ -12,9 +12,13 @@ https://www.figma.com/design/jvcjzjCKw9YlhCNOIY1GPY/Horizon-Banking-App?node-id=
 - Route Groups (make componenet without affecting url eg: prevent to be part of url)
 - React Count up
 - AppWrite for Authentication and Database
+- Plaid for banking functionality
 
 ### Dependencies
 
 - React Countup (pnpm add react-countup)
 - Chart.js (pnpm add chart.js) and (pnpm add react-chartjs-2)
 - pnpm add node-appwrite
+- pnpm add react-plaid-link
+- pnpm add plaid
+- pnpm add dwolla-v2
