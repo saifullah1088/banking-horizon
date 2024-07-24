@@ -21,11 +21,16 @@ const MyBanks = async () => {
         </div>
         <div className="flex flex-wrap gap-6">
           {accounts &&
-            accounts.data.map((account: Account) => (
+            accounts.data.map((account: Account, index: number) => (
               <BankCard
                 key={account.id}
                 account={account}
                 userName={`${loggedIn?.firstName} ${loggedIn?.lastName}`}
+                colorClasses={
+                  index % 2 === 0
+                    ? "bank-card_content_even"
+                    : "bank-card_content_odd"
+                }
               />
             ))}
         </div>
