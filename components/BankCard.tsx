@@ -7,14 +7,15 @@ const BankCard = ({
   account,
   userName,
   showBalance = true,
+  colorClasses = "bank-card_content_odd",
 }: CreditCardProps) => {
   return (
     <div className="flex flex-col">
       <Link
         href={`/transaction-history?id=${account.appwriteItemId}`}
-        className="bank-card "
+        className="bank-card"
       >
-        <div className="bank-card_content">
+        <div className={colorClasses}>
           <div>
             <h1 className="text-16 font-semibold text-white">{account.name}</h1>
             <p className="font-ibm-plex-serif font-black text-white">
@@ -33,7 +34,13 @@ const BankCard = ({
           </article>
         </div>
 
-        <div className="bank-card_icon">
+        <div
+          className={
+            colorClasses === "bank-card_content_even"
+              ? "bank-card_icon_even"
+              : "bank-card_icon_odd"
+          }
+        >
           <Image src="/icons/Paypass.svg" width={20} height={24} alt="pay" />
           <Image
             src="/icons/mastercard.svg"
